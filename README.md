@@ -130,10 +130,84 @@ This endpoint can be extended to:
 - Tailwind CSS
 - React Player
 
-## License
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/WasimKhan0786/addfrre.git
+
+# Navigate to project directory
+cd addfrre
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+## 🌐 Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+**Quick Deploy:**
+- **Vercel:** [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/WasimKhan0786/addfrre)
+- **Netlify:** [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/WasimKhan0786/addfrre)
+
+## 📁 Project Structure
+
+```
+addfrre/
+├── app/
+│   ├── api/
+│   │   ├── video/
+│   │   │   └── route.ts
+│   │   └── terabox/
+│   │       └── route.ts
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   └── VideoPlayer.tsx
+├── public/
+├── .gitignore
+├── next.config.js
+├── package.json
+├── README.md
+└── DEPLOYMENT.md
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
 
 MIT
 
+## 🙏 Acknowledgments
+
+- React Player for video playback
+- Tailwind CSS for styling
+- Next.js for the framework
+
 ---
 
-Made with ❤️ in Bihar
+Made with ❤️ in Bihar by Wasim Khan

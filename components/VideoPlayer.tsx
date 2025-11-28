@@ -62,7 +62,16 @@ export default function VideoPlayer({ url, onEnded }: VideoPlayerProps) {
     setSeeking(true)
   }
 
-  const handleSeekMouseUp = (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleSeekMouseUp = (e: React.MouseEvent<HTMLInputElement> | React.TouchEvent<HTMLInputElement>) => {
+    setSeeking(false)
+    playerRef.current?.seekTo(parseFloat((e.target as HTMLInputElement).value))
+  }
+
+  const handleSeekTouchStart = () => {
+    setSeeking(true)
+  }
+
+  const handleSeekTouchEnd = (e: React.TouchEvent<HTMLInputElement>) => {
     setSeeking(false)
     playerRef.current?.seekTo(parseFloat((e.target as HTMLInputElement).value))
   }
@@ -342,20 +351,22 @@ export default function VideoPlayer({ url, onEnded }: VideoPlayerProps) {
             step="any"
             value={played}
             onMouseDown={handleSeekMouseDown}
+            onTouchStart={handleSeekTouchStart}
             onChange={handleSeekChange}
             onMouseUp={handleSeekMouseUp}
-            className="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+            onTouchEnd={handleSeekTouchEnd}
+            className="flex-1 h-3 sm:h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer touch-none"
           />
           <span className="text-sm text-gray-400 min-w-[45px]">
             {formatTime(duration)}
           </span>
         </div>
 
-        <div className="flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between flex-wrap gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={handlePlayPause}
-              className="w-10 h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 rounded-full transition-colors"
+              className="w-10 h-10 sm:w-10 sm:h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-colors touch-manipulation"
               title="Play/Pause"
             >
               {isPlaying ? (
@@ -380,17 +391,17 @@ export default function VideoPlayer({ url, onEnded }: VideoPlayerProps) {
                 step="0.1"
                 value={volume}
                 onChange={handleVolumeChange}
-                className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                className="w-20 sm:w-24 h-3 sm:h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer touch-none"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
             {/* Picture-in-Picture Button */}
             {isPiPSupported && !isYouTube && (
               <button
                 onClick={handlePictureInPicture}
-                className="flex items-center gap-2 px-3 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 rounded-lg transition-colors text-xs sm:text-sm font-medium touch-manipulation"
                 title="Picture-in-Picture Mode (Background Play)"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -406,7 +417,7 @@ export default function VideoPlayer({ url, onEnded }: VideoPlayerProps) {
               <div className="relative">
                 <button
                   onClick={() => setShowQualityMenu(!showQualityMenu)}
-                  className="flex items-center gap-2 px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-sm font-medium"
+                  className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-2 bg-gray-700 hover:bg-gray-600 active:bg-gray-500 rounded-lg transition-colors text-xs sm:text-sm font-medium touch-manipulation"
                   title="Video Quality"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -446,7 +457,7 @@ export default function VideoPlayer({ url, onEnded }: VideoPlayerProps) {
             <button
               onClick={handleDownload}
               disabled={!isDirectVideo || downloading}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-lg transition-colors text-sm font-medium"
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 bg-green-600 hover:bg-green-700 active:bg-green-800 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-lg transition-colors text-xs sm:text-sm font-medium touch-manipulation"
               title={isDirectVideo ? 'Download video' : 'Download only available for direct video files'}
             >
               {downloading ? (
